@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "mssql2": {
+      "ignored": "true",
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:ApplicationDbContext"
+    },
+    "sqlite1": {
+      "type": "sqlite",
+      "connectionId": "ConnectionStrings:ApplicationDbContext",
+      "dynamicId": null
+    },
+    "secrets1": {
+      "type": "secrets",
+      "connectionId": null
+    }
+  }
+}

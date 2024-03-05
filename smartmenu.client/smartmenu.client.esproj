@@ -9,6 +9,7 @@
     <BuildOutputFolder>$(MSBuildProjectDirectory)\dist</BuildOutputFolder>
   </PropertyGroup>
   <ItemGroup>
+    <Folder Include="Migrations\" />
     <Folder Include="src\Pages\" />
   </ItemGroup>
 </Project>
