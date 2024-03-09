@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using MySqlConnector;
 using SmartMenu.Server.Data;
 using System.Security.Claims;
 
@@ -13,11 +12,10 @@ namespace SmartMenu.Server
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            string connectionString = builder.Configuration.GetConnectionString("ApplicationDbContext") ?? throw new ArgumentNullException("String de conexão nao encontrada no arquivo de configuração");
+            string connectionString = builder.Configuration.GetConnectionString("ApplicationDbContext") ?? throw new ArgumentNullException("String de conexão não encontrada no arquivo de configuração");
 
-            MySqlConnection connection = new MySqlConnection(connectionString);
+            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
            
             builder.Services.AddAuthorization();
             builder.Services.AddIdentityApiEndpoints<ApplicationUser>()

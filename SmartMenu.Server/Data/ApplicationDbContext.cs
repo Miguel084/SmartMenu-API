@@ -3,15 +3,20 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace SmartMenu.Server.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        protected readonly IConfiguration Configuration;
+
+        public ApplicationDbContext(IConfiguration configuration)
         {
+            Configuration = configuration;
         }
-        protected override void OnModelCreating(ModelBuilder builder)
+
+        protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            base.OnModelCreating(builder);
-        }   
+            // connect to sqlite database
+            options.UseSqlite(Configuration.GetConnectionString("ApplicationDbContext"));
+        }
+
     }
 }
