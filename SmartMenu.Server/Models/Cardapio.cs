@@ -4,7 +4,7 @@ namespace SmartMenu.Server.Models
 {
     public class Cardapio
     {
-        [Key]
+        [Key]  
         public int CardapioId { get; set; }
 
         [Required]
