@@ -4,7 +4,7 @@ namespace SmartMenu.Server.Models
 {
     public class ItemMenu
     {
-        [Key]
+        [Key] 
         public int ItemMenuId { get; set; }
 
         [Required]
