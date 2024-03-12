@@ -107,7 +107,7 @@ namespace SmartMenu.Server.Migrations
             migrationBuilder.DropTable(
                 name: "ClientesRestaurantes");
 
-            migrationBuilder.DropTable(
+            migrationBuilder.DropTable(  
                 name: "ItensMenu");
         }
     }
