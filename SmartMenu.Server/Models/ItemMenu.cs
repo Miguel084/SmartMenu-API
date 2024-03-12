@@ -10,7 +10,7 @@ namespace SmartMenu.Server.Models
         [Required]
         public string Nome { get; set; }
 
-        public string Descricao { get; set; }
+        public string? Descricao { get; set; }
 
         [Required]
         public decimal Preco { get; set; }
@@ -21,8 +21,8 @@ namespace SmartMenu.Server.Models
         [Required]
         public int CategoriaId { get; set; }
 
-        public string Alergenos { get; set; }
+        public string? Alergenos { get; set; }
 
-        public string Imagem { get; set; }
+        public string? Imagem { get; set; }
     }
 }

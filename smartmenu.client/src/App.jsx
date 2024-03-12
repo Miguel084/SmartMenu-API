@@ -2,7 +2,7 @@
 function App() {
   return (
       <>
-        <p className="bg-blue">My first paragraph</p>
+          <p className="bg-blue">{ }</p>
       </>
   );
 }

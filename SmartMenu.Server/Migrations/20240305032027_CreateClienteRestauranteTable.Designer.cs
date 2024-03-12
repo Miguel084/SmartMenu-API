@@ -22,7 +22,6 @@ namespace SmartMenu.Server.Migrations
                 .HasAnnotation("ProductVersion", "8.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 #pragma warning restore 612, 618
         }
     }
