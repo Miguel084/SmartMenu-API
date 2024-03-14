@@ -5,8 +5,8 @@ namespace SmartMenu.Server.Models
 {
     public class Cardapio
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CardapioId { get; set; }
 
         public string? Imagem { get; set; }
