@@ -43,16 +43,7 @@ namespace SmartMenu.Server
             app.UseStaticFiles();
             app.MapIdentityApi<ApplicationUser>();
 
-            app.MapPost("/logout", async (SignInManager<ApplicationUser> signInManager) =>
-            {
-                await signInManager.SignOutAsync();
-            }).RequireAuthorization();
-
-            app.MapGet("/pingauth",(ClaimsPrincipal user) =>
-            {
-                var email = user.FindFirst(ClaimTypes.Email);
-                return Results.Json(new { email });
-            }).RequireAuthorization();
+            
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

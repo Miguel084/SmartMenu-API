@@ -1,16 +1,15 @@
 {
   "dependencies": {
-    "sqlite1": {
-      "secretStore": "LocalSecretsFile",
-      "type": "sqlite.local",
-      "connectionId": "ConnectionStrings:ApplicationDbContext",
-      "dynamicId": null
-    },
     "secrets1": {
       "secretStore": null,
       "resourceId": null,
       "type": "secrets.user",
       "connectionId": null
+    },
+    "sqlite1": {
+      "secretStore": "LocalSecretsFile",
+      "type": "sqlite.local",
+      "connectionId": "ConnectionStrings:ApplicationDbContext"
     }
   }
 }

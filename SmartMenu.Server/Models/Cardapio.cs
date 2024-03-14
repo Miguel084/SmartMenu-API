@@ -7,21 +7,16 @@ namespace SmartMenu.Server.Models
         [Key]
         public int CardapioId { get; set; }
 
-        [Required]
-        public int RestauranteId { get; set; }
+        public int? Imagem { get; set; }
 
         [Required]
         public required string Nome { get; set; }
 
-        public string Descricao { get; set; }
+        [Required]
+        public required string Descricao { get; set; }
 
         [Required]
-        public DateTime DataCriacao { get; set; }
+        public required double Preco { get; set; }
 
-        [Required]
-        public required string Categoria { get; set; }
-
-        [Required]
-        public required string Status { get; set; }
     }
 }

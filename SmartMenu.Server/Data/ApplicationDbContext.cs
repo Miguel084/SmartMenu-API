@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using SmartMenu.Server.Models;
 
 namespace SmartMenu.Server.Data
 {
@@ -12,11 +13,13 @@ namespace SmartMenu.Server.Data
             Configuration = configuration;
         }
 
+        public object ClienteRestaurante { get; internal set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
-            // connect to sqlite database
             options.UseSqlite(Configuration.GetConnectionString("ApplicationDbContext"));
         }
+        public DbSet<Cardapio> Cardapios { get; set; }
 
     }
 }
