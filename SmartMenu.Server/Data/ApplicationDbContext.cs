@@ -12,6 +12,8 @@ namespace SmartMenu.Server.Data
             Configuration = configuration;
         }
 
+        public object ClienteRestaurante { get; internal set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             // connect to sqlite database
