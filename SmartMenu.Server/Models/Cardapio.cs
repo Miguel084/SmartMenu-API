@@ -5,14 +5,6 @@ namespace SmartMenu.Server.Models
 {
     public class Cardapio
     {
-        // public Cardapio(string? imagem, string nome, string descricao, double valor)
-        // {
-        //     Imagem = imagem;
-        //     Nome = nome;
-        //     Descricao = descricao;
-        //     Valor = valor;
-        // }
-
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CardapioId { get; set; }
