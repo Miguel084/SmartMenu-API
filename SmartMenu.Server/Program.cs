@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SmartMenu.Server.Data;
-using System.Security.Claims;
 
 namespace SmartMenu.Server
 {
@@ -16,15 +15,22 @@ namespace SmartMenu.Server
 
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
 
-           
             builder.Services.AddAuthorization();
             builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            // Add services to the container.
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyMethod()
+                           .AllowAnyHeader()
+                           .SetIsOriginAllowed(_ => true)
+                           .AllowCredentials();
+                });
+            });
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -33,15 +39,11 @@ namespace SmartMenu.Server
 
             builder.Services.AddAuthorization(options =>
             {
-                // By default, all incoming requests will be authorized according to the default policy.
                 options.FallbackPolicy = options.DefaultPolicy;
             });
 
             var app = builder.Build();
 
-            
-
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -50,12 +52,18 @@ namespace SmartMenu.Server
 
             app.UseHttpsRedirection();
 
+            app.UseRouting();
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseCors(); // Aplica a política CORS global
 
-            app.MapControllers();
-
-            app.MapFallbackToFile("/index.html");
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapFallbackToFile("/index.html");
+            });
 
             app.Run();
         }

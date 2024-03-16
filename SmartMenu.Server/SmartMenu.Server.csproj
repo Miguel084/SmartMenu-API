@@ -37,6 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Controllers\wwwroot\imagens\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 
