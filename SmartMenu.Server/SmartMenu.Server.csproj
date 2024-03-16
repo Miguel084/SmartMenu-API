@@ -37,8 +37,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\wwwroot\imagens\" />
+    <Folder Include="imagens\" />
     <Folder Include="Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Controllers\wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Controllers\wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Controllers\wwwroot\**" />
   </ItemGroup>
 
 </Project>

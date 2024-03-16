@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using SmartMenu.Server.Data;
 
 namespace SmartMenu.Server
@@ -11,7 +12,7 @@ namespace SmartMenu.Server
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            string connectionString = builder.Configuration.GetConnectionString("ApplicationDbContext") ?? throw new ArgumentNullException("String de conexão não encontrada no arquivo de configuração");
+            string connectionString = builder.Configuration.GetConnectionString("ApplicationDbContext") ?? throw new ArgumentNullException("String de conexï¿½o nï¿½o encontrada no arquivo de configuraï¿½ï¿½o");
 
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
 
@@ -36,11 +37,11 @@ namespace SmartMenu.Server
 
             builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
                 .AddNegotiate();
-
-            builder.Services.AddAuthorization(options =>
-            {
-                options.FallbackPolicy = options.DefaultPolicy;
-            });
+            
+            // builder.Services.AddAuthorization(options =>
+            // {
+            //     options.FallbackPolicy = options.DefaultPolicy;
+            // });
 
             var app = builder.Build();
 
@@ -51,13 +52,19 @@ namespace SmartMenu.Server
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(builder.Environment.ContentRootPath, "imagens")),
+                RequestPath = "/imagens"
+            });
 
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCors(); // Aplica a política CORS global
+            app.UseCors(); // Aplica a polï¿½tica CORS global
 
             app.UseEndpoints(endpoints =>
             {

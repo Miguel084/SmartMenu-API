@@ -41,23 +41,32 @@ namespace SmartMenu.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Cardapio>> Post([FromForm] CardapioModel cardapioModel)
         {
+            
+            var guid = Guid.NewGuid().ToString();
+            
+            Cardapio cardapio = new Cardapio()
+            {
+                Nome = cardapioModel.Nome,
+                Descricao = cardapioModel.Descricao,
+                Valor = cardapioModel.Valor
+            };
+            
             // Verifica se a imagem foi fornecida
             if (cardapioModel.Imagem != null)
             {
                 // Salvar arquivo
-                var nomeArquivo = Guid.NewGuid().ToString() + Path.GetExtension(cardapioModel.Imagem.FileName);
-                var caminhoArquivo = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imagens", nomeArquivo);
+                var nomeArquivo = guid + Path.GetExtension(cardapioModel.Imagem.FileName);
+                var urlImagem = Path.Combine("imagens", nomeArquivo);
+                var caminhoArquivo = Path.Combine(Directory.GetCurrentDirectory(),"imagens", nomeArquivo);
 
                 using (var stream = new FileStream(caminhoArquivo, FileMode.Create))
                 {
                     await cardapioModel.Imagem.CopyToAsync(stream);
                 }
 
-
+                cardapio.Imagem = urlImagem;
             }
-
-            // Converte CardapioModel para Cardapio
-            Cardapio cardapio = cardapioModel.Converter();
+            
 
             // Adiciona o cardápio ao contexto e salva as alterações
             _context.Cardapios.Add(cardapio);
@@ -80,19 +89,7 @@ namespace SmartMenu.Server.Controllers
 
             // Propriedade Imagem permite ser nula
             public IFormFile? Imagem { get; set; }
-
-            // Método para converter CardapioModel para Cardapio
-            public Cardapio Converter()
-            {
-                Cardapio cardapio = new Cardapio
-                {
-                    Nome = Nome,
-                    Descricao = Descricao,
-                    Valor = Valor
-                };
-
-                return cardapio;
-            }
+            
         }
     }
 }
