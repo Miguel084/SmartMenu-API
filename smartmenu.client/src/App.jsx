@@ -1,9 +1,13 @@
+import React from 'react';
+import Menu from './Menu';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-      <>
-          <p className="bg-blue">{ }</p>
-      </>
+    <div className="App">
+      <Menu />
+    </div>
   );
 }
+
 export default App;
