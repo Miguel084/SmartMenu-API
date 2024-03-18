@@ -6,9 +6,9 @@ const Menu = () => {
         nome: '',
         descricao: '',
         valor: '',
-        imagem: null // Para armazenar a imagem que será enviada
+        imagem: null // Para armazenar a imagem que serÃ¡ enviada
     });
-    const [showForm, setShowForm] = useState(false); // Estado para controlar a visibilidade do formulário
+    const [showForm, setShowForm] = useState(false); // Estado para controlar a visibilidade do formulÃ¡rio
 
     useEffect(() => {
         fetchMenuItems();
@@ -18,12 +18,12 @@ const Menu = () => {
         try {
             const response = await fetch('https://localhost:7265/Cardapio');
             if (!response.ok) {
-                throw new Error('Erro ao buscar itens do cardápio');
+                throw new Error('Erro ao buscar itens do cardÃ¡pio');
             }
             const data = await response.json();
             setMenuItems(data);
         } catch (error) {
-            console.error('Erro ao buscar itens do cardápio:', error);
+            console.error('Erro ao buscar itens do cardÃ¡pio:', error);
         }
     };
 
@@ -33,12 +33,12 @@ const Menu = () => {
                 method: 'DELETE',
             });
             if (!response.ok) {
-                throw new Error('Erro ao excluir item do cardápio');
+                throw new Error('Erro ao excluir item do cardÃ¡pio');
             }
-            // Atualiza a lista de itens do menu após a exclusão
+            // Atualiza a lista de itens do menu apÃ³s a exclusÃ£o
             fetchMenuItems();
         } catch (error) {
-            console.error('Erro ao excluir item do cardápio:', error);
+            console.error('Erro ao excluir item do cardÃ¡pio:', error);
         }
     };
 
@@ -70,22 +70,22 @@ const Menu = () => {
                 body: formData // Envia FormData em vez de JSON
             });
             if (!response.ok) {
-                throw new Error('Erro ao adicionar novo item ao cardápio');
+                throw new Error('Erro ao adicionar novo item ao cardÃ¡pio');
             }
             // Limpa os campos do novo item e atualiza a lista de itens do menu
             setNewItem({
                 nome: '',
                 descricao: '',
                 valor: '',
-                imagem: null // Limpa também o campo de imagem
+                imagem: null // Limpa tambÃ©m o campo de imagem
             });
             fetchMenuItems();
-            setShowForm(false); // Fecha o formulário após o envio bem-sucedido
+            setShowForm(false); // Fecha o formulÃ¡rio apÃ³s o envio bem-sucedido
         } catch (error) {
-            console.error('Erro ao adicionar novo item ao cardápio:', error);
+            console.error('Erro ao adicionar novo item ao cardÃ¡pio:', error);
         }
     };
-    console.log('descrição');
+    console.log('descriÃ§Ã£o');
 
     let URL = 'https://localhost:7265/';
     return (
@@ -99,7 +99,7 @@ const Menu = () => {
                         <input type="text" className="form-control" id="nome" name="nome" value={newItem.nome} onChange={handleInputChange} />
                     </div>
                     <div className="mb-3">
-                        <label htmlFor="descricao" className="form-label">Descrição</label>
+                        <label htmlFor="descricao" className="form-label">DescriÃ§Ã£o</label>
                         <input type="text" className="form-control" id="descricao" name="descricao" value={newItem.descricao} onChange={handleInputChange} />
                     </div>
                     <div className="mb-3">
@@ -122,14 +122,13 @@ const Menu = () => {
                                 <div className="card-body">
                                     <h5 className="card-title">{menuItem.nome}</h5>
                                     <p className="card-text">{menuItem.descricao}</p>
-                                    <p className="card-text">Preço: R$ {menuItem.valor}</p>
+                                    <p className="card-text">PreÃ§o: R$ {menuItem.valor}</p>
                                     <button className="btn btn-outline-danger btn-card" onClick={() => deleteMenuItem(menuItem.cardapioId)}>Excluir</button>
                                 </div>
                             </div>
                         </div>
                     ))}
                 </div>
-                <button className="btn  btn-lg btn-plus">+</button>
             </div>
     );
 };
