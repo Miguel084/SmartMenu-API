@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using SmartMenu.Server.Models;
 
 namespace SmartMenu.Server.Data
