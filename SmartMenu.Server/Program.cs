@@ -52,12 +52,19 @@ namespace SmartMenu.Server
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles(new StaticFileOptions
+
+            try {
+                app.UseStaticFiles(new StaticFileOptions
+                {
+                    FileProvider = new PhysicalFileProvider(
+                        Path.Combine(builder.Environment.ContentRootPath, "imagens")),
+                        RequestPath = "/imagens"
+                });
+            }
+            catch
             {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(builder.Environment.ContentRootPath, "imagens")),
-                RequestPath = "/imagens"
-            });
+                Directory.CreateDirectory("imagens");
+            }
 
             app.UseRouting();
 
