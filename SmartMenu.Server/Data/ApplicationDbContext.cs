@@ -21,6 +21,7 @@ namespace SmartMenu.Server.Data
             options.UseSqlite(Configuration.GetConnectionString("ApplicationDbContext"));
         }
         public DbSet<Cardapio> Cardapios { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
 
     }
 }
