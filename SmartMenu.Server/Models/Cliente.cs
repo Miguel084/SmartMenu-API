@@ -5,36 +5,32 @@ namespace SmartMenu.Server.Models
 {
     public class Cliente
     {
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid id;
+        public int ClienteId { get; set; }
 
-        [Required]
-        public string cnpj;
+        public string CNPJ { get; set; }
+        //public string InstricaoEstadual { get; set; }
 
-        public string inscricaoEnstadual;
+        //public string RazaoSocial { get; set; }
+        //public string NomeFantasia { get; set; }
 
-        public string razaoSocial;
+        //public string NomeRua { get; set; }
 
-        [Required]
-        public string email;
+        //public int NumeroComplemento { get; set; }
 
-        public string telefone;
+        //public string NomeCidade { get; set; }
 
-        public string cep;
+        //public string NomeBairro { get; set; }
 
-        public string endereco;
+        //public string UF { get; set; }
 
-        public string numero;
+        //public string CEP { get; set; }
+        //public string Email { get; set; }
 
-        public string bairro;
+        public DateOnly RegistroData { get; set; }
 
-        public string cidade;
-
-        public string estado;
-
-        [Required]
-        public string senha;
 
 
     }
