@@ -44,7 +44,7 @@ namespace SmartMenu.Server.Controllers
             
             var guid = Guid.NewGuid().ToString();
             
-            Cardapio cardapio = new Cardapio()
+            var cardapio = new Cardapio()
             {
                 Nome = cardapioModel.Nome,
                 Descricao = cardapioModel.Descricao,
