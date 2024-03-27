@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using SmartMenu.Server.Models;
 
 namespace SmartMenu.Server.Data
 {
@@ -19,6 +19,8 @@ namespace SmartMenu.Server.Data
             // connect to sqlite database
             options.UseSqlite(Configuration.GetConnectionString("ApplicationDbContext"));
         }
+        public DbSet<Cliente> Clientes { get; set; } = null;
+        public DbSet<Produto> Produtos { get; set; } = null;
 
     }
 }

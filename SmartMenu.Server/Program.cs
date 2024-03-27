@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Negotiate;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using SmartMenu.Server.Data;
-using System.Security.Claims;
 
 namespace SmartMenu.Server
 {
@@ -12,49 +12,35 @@ namespace SmartMenu.Server
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            string connectionString = builder.Configuration.GetConnectionString("ApplicationDbContext") ?? throw new ArgumentNullException("String de conexão não encontrada no arquivo de configuração");
+            string connectionString = builder.Configuration.GetConnectionString("ApplicationDbContext") ?? throw new ArgumentNullException("String de conexï¿½o nï¿½o encontrada no arquivo de configuraï¿½ï¿½o");
 
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite(connectionString));
 
-           
             builder.Services.AddAuthorization();
             builder.Services.AddIdentityApiEndpoints<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            // Add services to the container.
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyMethod()
+                           .AllowAnyHeader()
+                           .SetIsOriginAllowed(_ => true)
+                           .AllowCredentials();
+                });
+            });
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
                 .AddNegotiate();
-
-            builder.Services.AddAuthorization(options =>
-            {
-                // By default, all incoming requests will be authorized according to the default policy.
-                options.FallbackPolicy = options.DefaultPolicy;
-            });
+            
 
             var app = builder.Build();
 
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-            app.MapIdentityApi<ApplicationUser>();
-
-            app.MapPost("/logout", async (SignInManager<ApplicationUser> signInManager) =>
-            {
-                await signInManager.SignOutAsync();
-            }).RequireAuthorization();
-
-            app.MapGet("/pingauth",(ClaimsPrincipal user) =>
-            {
-                var email = user.FindFirst(ClaimTypes.Email);
-                return Results.Json(new { email });
-            }).RequireAuthorization();
-
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -63,12 +49,31 @@ namespace SmartMenu.Server
 
             app.UseHttpsRedirection();
 
+            try {
+                app.UseStaticFiles(new StaticFileOptions
+                {
+                    FileProvider = new PhysicalFileProvider(
+                        Path.Combine(builder.Environment.ContentRootPath, "imagens")),
+                        RequestPath = "/imagens"
+                });
+            }
+            catch
+            {
+                Directory.CreateDirectory("imagens");
+            }
+
+            app.UseRouting();
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
+            app.UseCors(); // Aplica a polï¿½tica CORS global
 
-            app.MapControllers();
-
-            app.MapFallbackToFile("/index.html");
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapFallbackToFile("/index.html");
+            });
 
             app.Run();
         }

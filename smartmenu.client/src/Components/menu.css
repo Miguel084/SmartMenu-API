@@ -1,0 +1,18 @@
+.btn-card {
+    width: 100%;
+}
+
+.btn-transparent {
+    background-color: blue;
+    border: 2px solid ;
+    color: black; /* Cor do sinal "+" */
+}
+
+.btn-Add {
+    bottom: 20px; /* Ajusta a distância do fundo da página */
+    right: 20px; /* Ajusta a distância da borda direita */
+    width: 60px; /* Define a largura do botão */
+    height: 60px; /* Define a altura do botão */
+    border-radius: 50%; /* Torna o botão redondo */
+    font-size: 2rem; /* Define o tamanho do sinal "+" */
+}
