@@ -17,31 +17,6 @@ namespace SmartMenu.Server.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
 
-            modelBuilder.Entity("SmartMenu.Server.Models.Cardapio", b =>
-                {
-                    b.Property<int>("CardapioId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Imagem")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<double>("Valor")
-                        .HasColumnType("REAL");
-
-                    b.HasKey("CardapioId");
-
-                    b.ToTable("Cardapios");
-                });
-
             modelBuilder.Entity("SmartMenu.Server.Models.Cliente", b =>
                 {
                     b.Property<int>("ClienteId")
@@ -97,6 +72,31 @@ namespace SmartMenu.Server.Migrations
                     b.HasKey("ClienteId");
 
                     b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("SmartMenu.Server.Models.Produto", b =>
+                {
+                    b.Property<int>("ProdutoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Imagem")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Valor")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("ProdutoId");
+
+                    b.ToTable("Produtos");
                 });
 #pragma warning restore 612, 618
         }

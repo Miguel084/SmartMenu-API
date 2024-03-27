@@ -6,27 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SmartMenu.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class MigracaoInicial : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Cardapios",
-                columns: table => new
-                {
-                    CardapioId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Imagem = table.Column<string>(type: "TEXT", nullable: true),
-                    Nome = table.Column<string>(type: "TEXT", nullable: false),
-                    Descricao = table.Column<string>(type: "TEXT", nullable: false),
-                    Valor = table.Column<double>(type: "REAL", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cardapios", x => x.CardapioId);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Clientes",
                 columns: table => new
@@ -50,16 +34,32 @@ namespace SmartMenu.Server.Migrations
                 {
                     table.PrimaryKey("PK_Clientes", x => x.ClienteId);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Produtos",
+                columns: table => new
+                {
+                    ProdutoId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Imagem = table.Column<string>(type: "TEXT", nullable: true),
+                    Nome = table.Column<string>(type: "TEXT", nullable: false),
+                    Descricao = table.Column<string>(type: "TEXT", nullable: false),
+                    Valor = table.Column<double>(type: "REAL", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Produtos", x => x.ProdutoId);
+                });
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Cardapios");
+                name: "Clientes");
 
             migrationBuilder.DropTable(
-                name: "Clientes");
+                name: "Produtos");
         }
     }
 }
