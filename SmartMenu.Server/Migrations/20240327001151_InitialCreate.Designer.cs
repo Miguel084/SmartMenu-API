@@ -11,7 +11,7 @@ using SmartMenu.Server.Data;
 namespace SmartMenu.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240309190319_InitialCreate")]
+    [Migration("20240327001151_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -20,45 +20,17 @@ namespace SmartMenu.Server.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
 
-            modelBuilder.Entity("SmartMenu.Server.Models.Cardapio", b =>
+            modelBuilder.Entity("SmartMenu.Server.Models.Cliente", b =>
                 {
-                    b.Property<int>("CardapioId")
+                    b.Property<int>("ClienteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Categoria")
+                    b.Property<string>("CEP")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("DataCriacao")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("RestauranteId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("CardapioId");
-
-                    b.ToTable("Cardapios");
-                });
-
-            modelBuilder.Entity("SmartMenu.Server.Models.ClienteRestaurante", b =>
-                {
                     b.Property<string>("CNPJ")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Cep")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -66,11 +38,15 @@ namespace SmartMenu.Server.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Endereco")
+                    b.Property<string>("InstricaoEstadual")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("InscricaoEstadual")
+                    b.Property<string>("NomeBairro")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NomeCidade")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -78,60 +54,52 @@ namespace SmartMenu.Server.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Numero")
+                    b.Property<string>("NomeRua")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("NumeroComplemento")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("RazaoSocial")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("RestauranteId")
-                        .HasColumnType("INTEGER");
+                    b.Property<DateOnly>("RegistroData")
+                        .HasColumnType("TEXT");
 
-                    b.Property<string>("Telefone")
+                    b.Property<string>("UF")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("CNPJ");
+                    b.HasKey("ClienteId");
 
-                    b.ToTable("ClientesRestaurantes");
+                    b.ToTable("Clientes");
                 });
 
-            modelBuilder.Entity("SmartMenu.Server.Models.ItemMenu", b =>
+            modelBuilder.Entity("SmartMenu.Server.Models.Produto", b =>
                 {
-                    b.Property<int>("ItemMenuId")
+                    b.Property<int>("ProdutoId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Alergenos")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("CategoriaId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("Disponibilidade")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Imagem")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Preco")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Valor")
+                        .HasColumnType("REAL");
 
-                    b.HasKey("ItemMenuId");
+                    b.HasKey("ProdutoId");
 
-                    b.ToTable("ItensMenu");
+                    b.ToTable("Produtos");
                 });
 #pragma warning restore 612, 618
         }
