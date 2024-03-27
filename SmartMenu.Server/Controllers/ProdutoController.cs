@@ -9,87 +9,73 @@ namespace SmartMenu.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CardapioController : ControllerBase
+    public class ProdutoController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
 
-        public CardapioController(ApplicationDbContext context)
+        public ProdutoController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Cardapio>> Get()
+        public async Task<IEnumerable<Produto>> Get()
         {
-            return await _context.Cardapios.ToListAsync();
+            return await _context.Produtos.ToListAsync();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var cardapio = await _context.Cardapios.FindAsync(id);
-            if (cardapio == null)
+            var produto = await _context.Produtos.FindAsync(id);
+            if (produto == null)
             {
                 return NotFound();
             }
 
-            _context.Cardapios.Remove(cardapio);
+            _context.Produtos.Remove(produto);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
         [HttpPost]
-        public async Task<ActionResult<Cardapio>> Post([FromForm] CardapioModel cardapioModel)
+        public async Task<ActionResult<Produto>> Post([FromForm] ProdutoDTO produtoModel)
         {
             
             var guid = Guid.NewGuid().ToString();
             
-            var cardapio = new Cardapio()
+            var produto = new Produto()
             {
-                Nome = cardapioModel.Nome,
-                Descricao = cardapioModel.Descricao,
-                Valor = cardapioModel.Valor
+                Nome = produtoModel.Nome,
+                Descricao = produtoModel.Descricao,
+                Valor = produtoModel.Valor
             };
             
             // Verifica se a imagem foi fornecida
-            if (cardapioModel.Imagem != null)
+            if (produtoModel.Imagem != null)
             {
                 // Salvar arquivo
-                var nomeArquivo = guid + Path.GetExtension(cardapioModel.Imagem.FileName);
+                var nomeArquivo = guid + Path.GetExtension(produtoModel.Imagem.FileName);
                 var urlImagem = Path.Combine("imagens", nomeArquivo);
                 var caminhoArquivo = Path.Combine(Directory.GetCurrentDirectory(),"imagens", nomeArquivo);
 
                 using (var stream = new FileStream(caminhoArquivo, FileMode.Create))
                 {
-                    await cardapioModel.Imagem.CopyToAsync(stream);
+                    await produtoModel.Imagem.CopyToAsync(stream);
                 }
 
-                cardapio.Imagem = urlImagem;
+                produto.Imagem = urlImagem;
             }
             
 
             // Adiciona o cardápio ao contexto e salva as alterações
-            _context.Cardapios.Add(cardapio);
+            _context.Produtos.Add(produto);
             await _context.SaveChangesAsync();
 
             // Retorna a resposta CreatedAtAction
-            return CreatedAtAction("Get", new { id = cardapio.CardapioId }, cardapio);
+            return CreatedAtAction("Get", new { id = produto.ProdutoId }, produto);
         }
 
-        public class CardapioModel
-        {
-            [Required]
-            public string Nome { get; set; }
-
-            [Required]
-            public string Descricao { get; set; }
-
-            [Required]
-            public double Valor { get; set; }
-
-            // Propriedade Imagem permite ser nula
-            public IFormFile? Imagem { get; set; }
-            
-        }
+       
     }
 }

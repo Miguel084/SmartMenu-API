@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SmartMenu.Server.Models
 {
-    public class Cardapio
+    public class Produto
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CardapioId { get; set; }
+        public int ProdutoId { get; set; }
 
         public string? Imagem { get; set; }
 
