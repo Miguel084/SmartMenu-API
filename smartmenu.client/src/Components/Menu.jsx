@@ -88,47 +88,48 @@ const Menu = () => {
 
     let URL = 'https://localhost:7265/';
     return (
-        <div className="container btn-group-sm" id="clientes">
+        <div className="container btn-group-sm" id="clientes" style={{ marginTop: "125px", background: ""}}>
             <h2>Menu</h2>
             <button className="row mt-4 btn btn-primary mb-3" onClick={() => setShowForm(true)}>Adicionar Novo Item</button>
-            {showForm && ( 
+            {showForm && (
                 <form onSubmit={handleAddItem}>
                     <div className="mb-3">
-                        <label htmlFor="nome" className="form-label">Nome</label>
-                        <input type="text" className="form-control" id="nome" name="nome" value={newItem.nome} onChange={handleInputChange} />
+                        <label htmlFor="nome" className="form-label" >Nome</label>
+                        <input type="text" className="form-control" id="nome" name="nome" value={newItem.nome} onChange={handleInputChange} required/>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="descricao" className="form-label">Descrição</label>
-                        <input type="text" className="form-control" id="descricao" name="descricao" value={newItem.descricao} onChange={handleInputChange} />
+                        <input type="text" className="form-control" id="descricao" name="descricao" value={newItem.descricao} onChange={handleInputChange} required/>
                     </div>
                     <div className="mb-3">
                         <label htmlFor="valor" className="form-label">Valor</label>
-                        <input type="text" className="form-control" id="valor" name="valor" value={newItem.valor} onChange={handleInputChange} />
+                        <input type="text" className="form-control" id="valor" name="valor" value={newItem.valor} onChange={handleInputChange}required />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="imagem" className="form-label">Imagem</label>
                         <input type="file" className="form-control" id="imagem" name="imagem" onChange={handleInputChange} />
                     </div>
                     <button type="submit" className="btn btn-primary">Salvar</button>
+                    <button className="btn btn-danger" onClick={() => setShowForm(false)}>Cancelar</button>
                 </form>
             )}
-            
-                <div className="row mt-4">
-                    {menuItems.map((menuItem) => (
-                        <div className="col-lg-4 col-md-6 col-sm-12 mb-3" key={menuItem.cardapioId}>
-                            <div className="card shadow" style={{ width: "15rem" }}>
-                                <img src={`${URL}${menuItem.imagem}`} alt={menuItem.nome} width="350" height="350" className="card-img-bottom img-fluid" />
-                                <div className="card-body">
-                                    <h5 className="card-title">{menuItem.nome}</h5>
-                                    <p className="card-text">{menuItem.descricao}</p>
-                                    <p className="card-text">Preço: R$ {menuItem.valor}</p>
-                                    <button className="btn btn-outline-danger btn-card" onClick={() => deleteMenuItem(menuItem.cardapioId)}>Excluir</button>
-                                </div>
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 justify-content-center mt-4">
+                {menuItems.map((menuItem) => (
+                    <div className="col mb-4" key={menuItem.produtoId}>
+                        <div className="card shadow" style={{ width: "15rem" }}>
+                            <img src={`${URL}${menuItem.imagem}`} alt={menuItem.nome} width="350" height="350" className="card-img-bottom img-fluid" />
+                            <div className="card-body">
+                                <h5 className="card-title">{menuItem.nome}</h5>
+                                <p className="card-text">{menuItem.descricao}</p>
+                                <p className="card-text">Preço: R$ {menuItem.valor}</p>
+                                <button className="btn btn-outline-danger btn-card" onClick={() => deleteMenuItem(menuItem.produtoId)}>Excluir</button>
                             </div>
                         </div>
-                    ))}
-                </div>
+                    </div>
+                ))}
             </div>
+        </div>
+
     );
 };
 
