@@ -1,6 +1,6 @@
 @SmartMenu.Server_HostAddress = http://localhost:5156
 
-GET {{SmartMenu.Server_HostAddress}}/Cardapio
+GET {{SmartMenu.Server_HostAddress}}/Produto
 Accept: application/json
 
 ###
