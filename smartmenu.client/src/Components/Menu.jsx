@@ -16,7 +16,7 @@ const Menu = () => {
 
     const fetchMenuItems = async () => {
         try {
-            const response = await fetch('https://localhost:7265/Cardapio');
+            const response = await fetch('https://localhost:7265/Produto');
             if (!response.ok) {
                 throw new Error('Erro ao buscar itens do cardápio');
             }
@@ -29,7 +29,7 @@ const Menu = () => {
 
     const deleteMenuItem = async (id) => {
         try {
-            const response = await fetch(`https://localhost:7265/Cardapio/${id}`, {
+            const response = await fetch(`https://localhost:7265/Produto/${id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {
@@ -65,7 +65,7 @@ const Menu = () => {
             formData.append('valor', newItem.valor);
             formData.append('imagem', newItem.imagem); // Adiciona o arquivo de imagem ao FormData
 
-            const response = await fetch('https://localhost:7265/Cardapio', {
+            const response = await fetch('https://localhost:7265/Produto', {
                 method: 'POST',
                 body: formData // Envia FormData em vez de JSON
             });
@@ -85,7 +85,6 @@ const Menu = () => {
             console.error('Erro ao adicionar novo item ao cardápio:', error);
         }
     };
-    console.log('descrição');
 
     let URL = 'https://localhost:7265/';
     return (
