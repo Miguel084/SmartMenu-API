@@ -76,6 +76,61 @@ namespace SmartMenu.Server.Controllers
             return CreatedAtAction("Get", new { id = produto.ProdutoId }, produto);
         }
 
-       
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Produto>> Put(int id, [FromForm] ProdutoDTO produtoModel)
+        {
+            var produto = await _context.Produtos.FindAsync(id);
+
+            if (produto == null)
+            {
+                return NotFound();
+            }
+
+            produto.Nome = produtoModel.Nome;
+            produto.Descricao = produtoModel.Descricao;
+            produto.Valor = produtoModel.Valor;
+
+            // Verifica se a imagem foi fornecida
+            if (produtoModel.Imagem != null)
+            {
+                // Salvar arquivo
+                var guid = Guid.NewGuid().ToString();
+                var nomeArquivo = guid + Path.GetExtension(produtoModel.Imagem.FileName);
+                var urlImagem = Path.Combine("imagens", nomeArquivo);
+                var caminhoArquivo = Path.Combine(Directory.GetCurrentDirectory(), "imagens", nomeArquivo);
+
+                using (var stream = new FileStream(caminhoArquivo, FileMode.Create))
+                {
+                    await produtoModel.Imagem.CopyToAsync(stream);
+                }
+
+                produto.Imagem = urlImagem;
+            }
+
+            try
+            {
+                _context.Entry(produto).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ProdutoExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
+
+        private bool ProdutoExists(int id)
+        {
+            return _context.Produtos.Any(e => e.ProdutoId == id);
+        }
     }
 }
