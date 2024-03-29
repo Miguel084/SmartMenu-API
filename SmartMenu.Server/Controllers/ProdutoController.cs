@@ -90,10 +90,8 @@ namespace SmartMenu.Server.Controllers
             produto.Descricao = produtoModel.Descricao;
             produto.Valor = produtoModel.Valor;
 
-            // Verifica se a imagem foi fornecida
             if (produtoModel.Imagem != null)
             {
-                // Salvar arquivo
                 var guid = Guid.NewGuid().ToString();
                 var nomeArquivo = guid + Path.GetExtension(produtoModel.Imagem.FileName);
                 var urlImagem = Path.Combine("imagens", nomeArquivo);
