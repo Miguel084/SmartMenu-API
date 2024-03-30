@@ -1,3 +1,4 @@
+[![Visual Studio](https://img.shields.io/badge/Visual%20Studio-2022-red.svg)](https://www.visualstudio.com/zh-hans/) [![Linguagem](https://img.shields.io/badge/Linguagem-C%23%208.0-orange.svg)](https://blogs.msdn.microsoft.com/dotnet/2016/08/24/whats-new-in-csharp-7-0/) 
 ## Instalação do Visual Studio 2022
 
 1. Pressione o botão do Windows e digite "Visual Studio Installer".
