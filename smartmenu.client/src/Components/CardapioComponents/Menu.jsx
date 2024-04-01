@@ -48,7 +48,7 @@ const Menu = () => {
         if (e.target.name === 'imagem') {
             setNewItem({
                 ...newItem,
-                imagem: e.target.files[0] // Armazena o arquivo de imagem
+                imagem: e.target.files[0] 
             });
         } else {
             setNewItem({
@@ -59,8 +59,8 @@ const Menu = () => {
     };
 
     const handleEditButtonClick = (id) => {
-        setEditItemId(id); // Armazena o ID do item que será editado
-        setShowEditModal(true); // Exibe o modal de edição
+        setEditItemId(id); 
+        setShowEditModal(true); 
     };
 
     const handleEditItem = async () => {
@@ -73,7 +73,7 @@ const Menu = () => {
 
             const response = await fetch(`https://localhost:7265/Produto/${editItemId}`, {
                 method: 'PUT',
-                body: formData, // Envie o FormData diretamente na requisição
+                body: formData, 
             });
             if (!response.ok) {
                 throw new Error('Erro ao editar item do cardápio');
@@ -92,24 +92,24 @@ const Menu = () => {
             formData.append('nome', newItem.nome);
             formData.append('descricao', newItem.descricao);
             formData.append('valor', newItem.valor);
-            formData.append('imagem', newItem.imagem); // Adiciona o arquivo de imagem ao FormData
+            formData.append('imagem', newItem.imagem);
 
             const response = await fetch('https://localhost:7265/Produto', {
                 method: 'POST',
-                body: formData // Envia FormData em vez de JSON
+                body: formData 
             });
             if (!response.ok) {
                 throw new Error('Erro ao adicionar novo item ao cardápio');
             }
-            // Limpa os campos do novo item e atualiza a lista de itens do menu
+            
             setNewItem({
                 nome: '',
                 descricao: '',
                 valor: '',
-                imagem: null // Limpa também o campo de imagem
+                imagem: null
             });
             fetchMenuItems();
-            setShowForm(false); // Fecha o formulário após o envio bem-sucedido
+            setShowForm(false); 
         } catch (error) {
             console.error('Erro ao adicionar novo item ao cardápio:', error);
         }
@@ -118,7 +118,7 @@ const Menu = () => {
     let URL = 'https://localhost:7265/';
     return (
         <div className="container btn-group-sm" id="clientes" style={{ marginTop: "125px", background: "" }}>
-            <h2>Menu</h2>
+            <h2>Meu Cardapio</h2>
             <button className="row mt-4 btn btn-primary mb-3" onClick={() => setShowForm(true)}>Adicionar Novo Item</button>
             {showForm && (
                 <form onSubmit={handleAddItem}>
