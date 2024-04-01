@@ -15,7 +15,11 @@ function Header() {
                 <div className="collapse navbar-collapse align-content-end" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item active">
-                            <a className="nav-link " href="/">Início</a>
+                            {window.location.pathname === "/CardapioAdmin" ? (
+                                <a className="nav-link" href="/">Início</a>
+                            ) : (
+                                ""
+                            )}
                         </li>
                     </ul>
                 </div>

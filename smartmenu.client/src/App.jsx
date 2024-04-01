@@ -1,17 +1,19 @@
 import React from 'react';
-import Header from './Components/Header';
-import Menu from './Components/Menu';
-import Footer from './Components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter } from "react-router-dom";
+import { RecoilRoot } from "recoil";
+import AppRoutes from '../Routes/index';
 
-function App() {
+
+export default function App() {
   return (
     <>
-      <Header />
-      <Menu />
-      <Footer />
+     <RecoilRoot>
+      <BrowserRouter>
+        <AppRoutes/>
+      </BrowserRouter>
+    </RecoilRoot>
     </>
   );
 }
 
-export default App;
