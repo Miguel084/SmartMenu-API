@@ -1,0 +1,6 @@
+﻿services:
+  smartmenu.server:
+    image: smartmenu.server
+    build:
+      context: .
+      dockerfile: SmartMenu.Server/Dockerfile

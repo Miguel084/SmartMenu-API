@@ -51,10 +51,8 @@ namespace SmartMenu.Server.Controllers
                 Valor = produtoModel.Valor
             };
             
-            // Verifica se a imagem foi fornecida
             if (produtoModel.Imagem != null)
             {
-                // Salvar arquivo
                 var nomeArquivo = guid + Path.GetExtension(produtoModel.Imagem.FileName);
                 var urlImagem = Path.Combine("imagens", nomeArquivo);
                 var caminhoArquivo = Path.Combine(Directory.GetCurrentDirectory(),"imagens", nomeArquivo);
@@ -66,13 +64,11 @@ namespace SmartMenu.Server.Controllers
 
                 produto.Imagem = urlImagem;
             }
-            
-
-            // Adiciona o cardápio ao contexto e salva as alterações
+          
             _context.Produtos.Add(produto);
             await _context.SaveChangesAsync();
 
-            // Retorna a resposta CreatedAtAction
+            
             return CreatedAtAction("Get", new { id = produto.ProdutoId }, produto);
         }
 

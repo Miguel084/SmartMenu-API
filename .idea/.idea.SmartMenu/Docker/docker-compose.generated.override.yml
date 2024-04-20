@@ -1,0 +1,23 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  smartmenu.server:
+    build:
+      context: "C:\\Users\\alegr\\source\\repos\\SmartMenu-API"
+      dockerfile: "SmartMenu.Server/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/SmartMenu.Server.dll"
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ASPNETCORE_STATICWEBASSETS: "/app/bin/Debug/net8.0/SmartMenu.Server.staticwebassets.runtime.CT.json"
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "smartmenu.server:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\alegr\\AppData\\Roaming\\Microsoft\\UserSecrets:/home/app/.microsoft/usersecrets"
+    - "C:\\Users\\alegr\\.nuget\\packages:/home/app/.nuget/packages"
+    - "C:\\Users\\alegr\\source\\repos\\SmartMenu-API\\SmartMenu.Server:/app:rw"
+    - "C:\\Users\\alegr\\source\\repos\\SmartMenu-API:/src:rw"
+    working_dir: "/app"

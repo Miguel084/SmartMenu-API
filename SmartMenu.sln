@@ -7,6 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartMenu.Server", "SmartMe
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "smartmenu.client", "smartmenu.client\smartmenu.client.esproj", "{99BE6251-15BD-443F-9C51-20895EAA23C4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{212C93A2-CC02-4ABD-9EB8-BB1FF8598A43}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
