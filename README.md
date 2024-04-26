@@ -17,7 +17,8 @@
 
 1. Pressione `Ctrl + '` para abrir o terminal.
 2. Digite `cd .\SmartMenu.Server\` e pressione Enter.
-3. Execute o comando `dotnet ef database update`.
+3. Execute o comando `dotnet tool restore` e em seguida:
+4. Execute o comando `dotnet ef database update`.
 
 ## Visualizar o Banco de Dados
 
