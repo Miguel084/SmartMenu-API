@@ -27,7 +27,7 @@
 name: Build and deploy a container to an Azure Web App
 
 env:
-  AZURE_WEBAPP_NAME: your-app-name  # set this to the name of your Azure Web App
+  AZURE_WEBAPP_NAME: SmartMenu  # set this to the name of your Azure Web App
 
 on:
   push:
@@ -62,7 +62,7 @@ jobs:
         with:
           push: true
           tags: ghcr.io/${{ env.REPO }}:${{ github.sha }}
-          file: ./Dockerfile
+          file: ../SmartMenu.Server/Dockerfile
 
   deploy:
     permissions:
