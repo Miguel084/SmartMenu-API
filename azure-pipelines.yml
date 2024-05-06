@@ -33,7 +33,7 @@ stages:
       inputs:
         command: buildAndPush
         repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
+        dockerfile: SmartMenu.Server/Dockerfile
         containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
